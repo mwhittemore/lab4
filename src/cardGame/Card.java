@@ -15,22 +15,14 @@ public class Card implements Comparable<Card> {
 	private CardRank rank;
 	private CardSuit suit;
 	
-	/* point to other cards to impose order */
-	private Card prev;
-	private Card next;
-	
 	public Card (CardRank r, CardSuit s) {
 		setRank(r);
 		setSuit(s);
-		prev = null;
-		next = null;
 	}
 	
 	public Card (CardRank r, CardSuit s, Card p, Card n) {
 		setRank(r);
 		setSuit(s);
-		setPrev(p);
-		setNext(n);
 	}
 	
 	/* returns negative value if less than c, 0 if equal, and positive if greater than c
@@ -72,40 +64,5 @@ public class Card implements Comparable<Card> {
 	
 	public void setSuit (CardSuit s) {
 		suit = s;
-	}
-	
-	public Card getPrev () {
-		return prev;
-	}
-	
-	public void setPrev (Card p) {
-		// method will still run with a null p but won't do anything
-		if(p != null) {
-			// shifts links if there is a card stored in prev
-			if(prev != null) {
-				prev.next = p;
-				p.prev = prev;
-			}
-		
-			p.next = this;
-			prev = p;
-		}
-	}
-	
-	public Card getNext () {
-		return next;
-	}
-	
-	public void setNext (Card n) {
-		if(n != null) {
-			if(next!= null) {
-				// shifts links if there is a card stored in next
-				next.prev = n;
-				n.next = next;
-			}
-		
-			n.prev = this;
-			next = n;
-		}
 	}
 }

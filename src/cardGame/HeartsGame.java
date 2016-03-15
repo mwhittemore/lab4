@@ -62,40 +62,23 @@ public class HeartsGame {
 		currentPlayerIndex = findTwoOfClubs();
 	}
 	public void playGame() {
-		dealCards();
-		
+	//	while(!gameOver) {
+			shuffleAndDeal();
+			passCards();
+			
+			currentPlayerIndex = findTwoOfClubs();
+			
+			for(int i = 0; i < 13; i++) {
+				playTrick();
+			}
+	//	}
 	}
-	private void dealCards (){
-		Hand[] initHands = new Hand[4];
-		Card current;
-		
-		// initialize array
-		for(int i = 0; i < 4; i++)
-			initHands[i] = new Hand();
-		
+	private void shuffleAndDeal (){
 		// shuffle 3 times
-		for(int i = 1; i < 4; i++)
+		for(int i = 0; i < 3; i++)
 			baseDeck.shuffle();
 		
-		current = baseDeck.getTopCard();
-		
-		// probably not the best way to do this
-		for(int i = 0; i < 13; i++) {
-			for(int j = 0; j < 4; j++) {
-				System.out.println(current);
-				initHands[j].addToTop(current);
-				current = current.getNext();
-			}
-		}
-		System.out.println("END");
-		current = initHands[0].getTopCard();
-		for(int i = 0; i < initHands[0].getNumCards(); i++) {
-			current = current.getNext();
-		}
-		
-		// set hands for corresponding players
-		for(int i = 0; i < 4; i++)
-			players[i].setHand(initHands[i]);
+		baseDeck.deal(players);
 	}
 	private void passCards () {
 		// prompt each player to pick three cards to pass
@@ -108,10 +91,9 @@ public class HeartsGame {
 		//		0 to 2, 2 to 0, 3 to 1, 1 to 3
 	}
 	private void playTrick () {
-		for(HeartsPlayer player: players) {
-			player.chooseCards(1);
+		for(int j = currentPlayerIndex; j < (currentPlayerIndex + 3); j++) {
+			
 		}
-		// to be continued
 	}
 	private boolean checkMoonShot () {
 		return false;

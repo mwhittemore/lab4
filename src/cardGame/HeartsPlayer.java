@@ -35,10 +35,13 @@ public class HeartsPlayer {
 		
 	}
 	public void addToHand(Card c) {
-		hand.add(c);                                 
+		hand.addToBottom(c);                                 
 	}
 	public String getName() {
 		return name;
+	}
+	public void printHand() {
+		hand.print();
 	}
 	private boolean checkSuit(CardSuit s) {
 		return true;
